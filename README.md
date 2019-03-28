@@ -22,21 +22,21 @@
 
 1、通过 git clone https://github.com/skayliu/CamundaSpringBootDemo.git 下载本代码，然后导入Eclipse或IDEA中；
 
-2、创建camunda_demo数据库，修改application.yml中的mysql连接配置或应用服务的端口，默认为8088；
+2、创建camunda_demo数据库，修改application.yml中的mysql连接配置或应用服务的端口，默认为8080；
 
 3、通过mvn spring-boot:run 启动应用，应用启动时会自动创建数据库表并进行初始化
 
-4、打开浏览器并访问 http://localhost:8088，使用kermit/superSecret登录Camunda Webapp，里边有Admin、Cockpit、TaskList应用，在Admin中添加用户
+4、打开浏览器并访问 http://localhost:8080，使用kermit/superSecret登录Camunda Webapp，里边有Admin、Cockpit、TaskList应用，在Admin中添加用户
 
-5、打开浏览器并访问 http://localhost:8088/swagger-ui.html，测试流程使用接口示例;
+5、打开浏览器并访问 http://localhost:8080/swagger-ui.html，测试流程使用接口示例;
 
-6、打开浏览器并访问 http://localhost:8088/cmaunda-swagger-ui.html，查看原生Camunda REST API;
+6、打开浏览器并访问 http://localhost:8080/cmaunda-swagger-ui.html，查看原生Camunda REST API;
 
 ##流程建模
 
-1、打开浏览器并访问 http://localhost:8088/modeler.html，是WEB版流程模型编辑器示例，编辑好流程放到/src/main/resources/下，待自动重启好后，流程就可以使用了
+1、打开浏览器并访问 http://localhost:8080/modeler.html，是WEB版流程模型编辑器示例，编辑好流程放到/src/main/resources/下，待自动重启好后，流程就可以使用了
 
-2、PC端的请使用[Camunda Modeler](https://docs.camunda.org/manual/latest/modeler/camunda-modeler/)，创建好模型后使用工具栏最右边的按钮打开部署窗口，URL中输入：http://localhost:8088/engine-rest/engine/default/deployment/create，填写Name流程名称，和Authentication使用http basic并输入kermit/superSecret，然后执行Deploy部署流程
+2、PC端的请使用[Camunda Modeler](https://docs.camunda.org/manual/latest/modeler/camunda-modeler/)，创建好模型后使用工具栏最右边的按钮打开部署窗口，URL中输入：http://localhost:8080/engine-rest/engine/default/deployment/create，填写Name流程名称，和Authentication使用http basic并输入kermit/superSecret，然后执行Deploy部署流程
 
 3、登录Cockpit查看已部署的流程
 

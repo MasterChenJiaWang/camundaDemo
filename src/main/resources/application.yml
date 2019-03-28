@@ -9,7 +9,7 @@ camunda.bpm:
     type: mysql
     
 server:
-  port: 8088
+  port: 8080
   tomcat:
     uri-encoding: UTF-8
     
