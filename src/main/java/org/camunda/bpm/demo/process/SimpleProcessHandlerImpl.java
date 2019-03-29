@@ -14,6 +14,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.camunda.bpm.ProcessEngineService;
 import org.camunda.bpm.engine.HistoryService;
 import org.camunda.bpm.engine.IdentityService;
+import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.ProcessEngineConfiguration;
 import org.camunda.bpm.engine.ProcessEngineServices;
 import org.camunda.bpm.engine.RuntimeService;
@@ -52,6 +53,9 @@ public class SimpleProcessHandlerImpl implements SimpleProcessHandler {
 
 	@Autowired
 	private HistoryService historyService;
+	
+	@Autowired
+	private ProcessEngine processEngine;
 	
 
 	// @Context
@@ -94,10 +98,12 @@ public class SimpleProcessHandlerImpl implements SimpleProcessHandler {
 	public List<TaskDto> simpleStartProcess(PscCommonProcessRequest pscCommonProcessRequest, HttpServletRequest request)
 			throws Exception {
 		AuthenticationService authenticationService = new AuthenticationService();
-		UserAuthentication authentication = (UserAuthentication) authenticationService.createAuthenticate("default",
+		String engineName = processEngine.getName();
+		UserAuthentication authentication = (UserAuthentication) authenticationService.createAuthenticate(engineName,
 				pscCommonProcessRequest.getStarter(), null, null);
 		logger.info("authentication--------->" + authentication.getName());
 		Authentications.revalidateSession(request, authentication);
+		identityService.setAuthenticatedUserId(authentication.getName());
 		String processInstanceId = null;
 		List<TaskDto> resultList = new ArrayList<TaskDto>();
 		Map<String, Object> variables = new HashMap<String, Object>();
@@ -156,10 +162,12 @@ public class SimpleProcessHandlerImpl implements SimpleProcessHandler {
 	public List<TaskDto> simpleApproveProcess(PscCommonTaskRequest pscCommonTaskRequest, HttpServletRequest request)
 			throws Exception {
 		AuthenticationService authenticationService = new AuthenticationService();
-		UserAuthentication authentication = (UserAuthentication) authenticationService.createAuthenticate("default",
+		String engineName = processEngine.getName();
+		UserAuthentication authentication = (UserAuthentication) authenticationService.createAuthenticate(engineName,
 				pscCommonTaskRequest.getUserId(), null, null);
 		logger.info("authentication--------->" + authentication.getName());
 		Authentications.revalidateSession(request, authentication);
+		identityService.setAuthenticatedUserId(authentication.getName());
 		List<TaskDto> taskList = new ArrayList<TaskDto>();
 		Map<String, Object> variables = new HashMap<String, Object>();
 		variables = pscCommonTaskRequest.getVariables();
@@ -194,10 +202,12 @@ public class SimpleProcessHandlerImpl implements SimpleProcessHandler {
 	public List<TaskDto> simpleUndoProcess(PscCommonTaskRequest pscCommonTaskRequest, HttpServletRequest request)
 			throws Exception {
 		AuthenticationService authenticationService = new AuthenticationService();
-		UserAuthentication authentication = (UserAuthentication) authenticationService.createAuthenticate("default",
+		String engineName = processEngine.getName();
+		UserAuthentication authentication = (UserAuthentication) authenticationService.createAuthenticate(engineName,
 				pscCommonTaskRequest.getUserId(), null, null);
 		logger.info("authentication--------->" + authentication.getName());
 		Authentications.revalidateSession(request, authentication);
+		identityService.setAuthenticatedUserId(authentication.getName());
 		List<TaskDto> taskList = new ArrayList<TaskDto>();
 
 		ActivityInstance tree = runtimeService.getActivityInstance(pscCommonTaskRequest.getProcessInstId());
@@ -224,10 +234,12 @@ public class SimpleProcessHandlerImpl implements SimpleProcessHandler {
 			throw new Exception("驳回类型不能为空！");
 		}
 		AuthenticationService authenticationService = new AuthenticationService();
-		UserAuthentication authentication = (UserAuthentication) authenticationService.createAuthenticate("default",
+		String engineName = processEngine.getName();
+		UserAuthentication authentication = (UserAuthentication) authenticationService.createAuthenticate(engineName,
 				pscCommonTaskRequest.getUserId(), null, null);
 		logger.info("authentication--------->" + authentication.getName());
 		Authentications.revalidateSession(request, authentication);
+		identityService.setAuthenticatedUserId(authentication.getName());
 		List<TaskDto> taskList = new ArrayList<TaskDto>();
 
 		ActivityInstance tree = runtimeService.getActivityInstance(pscCommonTaskRequest.getProcessInstId());
@@ -285,10 +297,12 @@ public class SimpleProcessHandlerImpl implements SimpleProcessHandler {
 	public List<TaskDto> simpleTerminateProcess(PscCommonTaskRequest pscCommonTaskRequest, HttpServletRequest request)
 			throws Exception {
 		AuthenticationService authenticationService = new AuthenticationService();
-		UserAuthentication authentication = (UserAuthentication) authenticationService.createAuthenticate("default",
+		String engineName = processEngine.getName();
+		UserAuthentication authentication = (UserAuthentication) authenticationService.createAuthenticate(engineName,
 				pscCommonTaskRequest.getUserId(), null, null);
 		logger.info("authentication--------->" + authentication.getName());
 		Authentications.revalidateSession(request, authentication);
+		identityService.setAuthenticatedUserId(authentication.getName());
 		List<TaskDto> taskList = new ArrayList<TaskDto>();
 
 		ActivityInstance tree = runtimeService.getActivityInstance(pscCommonTaskRequest.getProcessInstId());
@@ -310,10 +324,12 @@ public class SimpleProcessHandlerImpl implements SimpleProcessHandler {
 	public List<TaskDto> simpleRestartProcess(PscCommonTaskRequest pscCommonTaskRequest, HttpServletRequest request)
 			throws Exception {
 		AuthenticationService authenticationService = new AuthenticationService();
-		UserAuthentication authentication = (UserAuthentication) authenticationService.createAuthenticate("default",
+		String engineName = processEngine.getName();
+		UserAuthentication authentication = (UserAuthentication) authenticationService.createAuthenticate(engineName,
 				pscCommonTaskRequest.getUserId(), null, null);
 		logger.info("authentication--------->" + authentication.getName());
 		Authentications.revalidateSession(request, authentication);
+		identityService.setAuthenticatedUserId(authentication.getName());
 		List<TaskDto> taskList = new ArrayList<TaskDto>();
 		String processDefId = pscCommonTaskRequest.getProcessDefId();
 		if(StringUtils.isBlank(processDefId)){
@@ -351,10 +367,12 @@ public class SimpleProcessHandlerImpl implements SimpleProcessHandler {
 	public List<TaskDto> simpleTurnOverProcess(PscCommonTaskRequest pscCommonTaskRequest, HttpServletRequest request)
 			throws Exception {
 		AuthenticationService authenticationService = new AuthenticationService();
-		UserAuthentication authentication = (UserAuthentication) authenticationService.createAuthenticate("default",
+		String engineName = processEngine.getName();
+		UserAuthentication authentication = (UserAuthentication) authenticationService.createAuthenticate(engineName,
 				pscCommonTaskRequest.getUserId(), null, null);
 		logger.info("authentication--------->" + authentication.getName());
 		Authentications.revalidateSession(request, authentication);
+		identityService.setAuthenticatedUserId(authentication.getName());
 		List<TaskDto> taskList = new ArrayList<TaskDto>();
 		Task task = taskService.createTaskQuery().taskId(pscCommonTaskRequest.getTaskId()).singleResult();
 	    task.setAssignee(pscCommonTaskRequest.getNextUserId());
@@ -373,10 +391,12 @@ public class SimpleProcessHandlerImpl implements SimpleProcessHandler {
 	public List<TaskDto> simpleJumpProcess(PscCommonTaskRequest pscCommonTaskRequest, HttpServletRequest request)
 			throws Exception {
 		AuthenticationService authenticationService = new AuthenticationService();
-		UserAuthentication authentication = (UserAuthentication) authenticationService.createAuthenticate("default",
+		String engineName = processEngine.getName();
+		UserAuthentication authentication = (UserAuthentication) authenticationService.createAuthenticate(engineName,
 				pscCommonTaskRequest.getUserId(), null, null);
 		logger.info("authentication--------->" + authentication.getName());
 		Authentications.revalidateSession(request, authentication);
+		identityService.setAuthenticatedUserId(authentication.getName());
 		List<TaskDto> taskList = new ArrayList<TaskDto>();
 		
 		ActivityInstance tree = runtimeService.getActivityInstance(pscCommonTaskRequest.getProcessInstId());
