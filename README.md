@@ -20,7 +20,7 @@
 
 ##使用步骤
 
-1、通过 git clone https://github.com/skayliu/CamundaSpringBootDemo.git 下载本代码，然后导入Eclipse或IDEA中；
+1、通过 git clone https://github.com/skayliu/CamundaSpringBootDemo.git 或 https://gitee.com/skay463/CamundaSpringBootDemo.git 下载本代码，然后导入Eclipse或IDEA中；
 
 2、创建camunda_demo数据库，修改application.yml中的mysql连接配置或应用服务的端口，默认为8080；
 
