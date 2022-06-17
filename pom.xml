@@ -19,7 +19,7 @@
 		<camunda-spin.version>1.6.6</camunda-spin.version>
 		<swagger-ui.version>3.20.9</swagger-ui.version>
 		<springfox.version>2.9.2</springfox.version>
-		<fastjson.version>1.2.31</fastjson.version>
+		<fastjson.version>1.2.83</fastjson.version>
 	</properties>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
