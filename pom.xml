@@ -17,7 +17,7 @@
 		<mysql-connector.version>5.1.47</mysql-connector.version>
 		<camunda-swagger.version>7.8.0</camunda-swagger.version>
 		<camunda-spin.version>1.6.6</camunda-spin.version>
-		<swagger-ui.version>3.20.9</swagger-ui.version>
+		<swagger-ui.version>3.23.11</swagger-ui.version>
 		<springfox.version>2.9.2</springfox.version>
 		<fastjson.version>1.2.31</fastjson.version>
 	</properties>
